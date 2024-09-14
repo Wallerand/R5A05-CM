@@ -1,0 +1,134 @@
+---
+import Code from "../../components/code.astro";
+---
+
+<section>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Gestion des dépendances <small>/</small> <small>Gestionnaires de dépendances</small>
+            </h1>
+            <main>
+                <table>
+                    <thead>
+                        <th></th>
+                        <th>Nom</th>
+                        <th>Langage</th>
+                        <th>Fichier</th>
+                        <th>Dépôt public</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <img src="images/composer.svg" alt="" style="vertical-align: middle; max-height: 48px; margin: 12px auto;">
+                            </td>
+                            <td style="vertical-align: middle;">
+                                Composer
+                            </td>
+                            <td style="vertical-align: middle;">PHP</td>
+                            <td style="vertical-align: middle;">composer.json<span style="display: block; font-size: 0.6em;">composer.lock</span></td>
+                            <td style="vertical-align: middle;">packagist.org</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <img src="images/npm.svg" alt="" style="vertical-align: middle; max-height: 48px; margin: 12px auto;">
+                            </td>
+                            <td style="vertical-align: middle;">
+                                NPM
+                            </td>
+                            <td style="vertical-align: middle;">Javascript</td>
+                            <td style="vertical-align: middle;">package.json<span style="display: block; font-size: 0.6em;">package-lock.json</span></td>
+                            <td style="vertical-align: middle;">npmjs.com</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <img src="images/yarn.svg" alt="" style="vertical-align: middle; max-height: 48px; margin: 12px auto;">
+                            </td>
+                            <td style="vertical-align: middle;">
+                                Yarn
+                            </td>
+                            <td style="vertical-align: middle;">Javascript</td>
+                            <td style="vertical-align: middle;">package.json<span style="display: block; font-size: 0.6em;">yarn.lock</span></td>
+                            <td style="vertical-align: middle;">npmjs.com</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <img src="images/pypi.svg" alt="" style="vertical-align: middle; max-height: 48px; margin: 12px auto;">
+                            </td>
+                            <td style="vertical-align: middle;">
+                                pip
+                            </td>
+                            <td style="vertical-align: middle;">Python</td>
+                            <td style="vertical-align: middle">requirements.txt</td>
+                            <td style="vertical-align: middle;">pypi.org</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center; vertical-align: middle;">
+                                <img src="images/maven.svg" alt="" style="vertical-align: middle; max-height: 48px; margin: 12px auto;">
+                            </td>
+                            <td style="vertical-align: middle;">
+                                Maven
+                            </td>
+                            <td style="vertical-align: middle;">Java</td>
+                            <td style="vertical-align: middle;">pom.xml</td>
+                            <td style="vertical-align: middle;">central.sonatype.org</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Gestion des dépendances <small>/</small> <small>Gestionnaires de dépendances</small>
+            </h1>
+            <main>
+                <div>
+                    <div>
+                        <!-- PHP Composer -->
+                        <Code>
+                            <script type="text/template">
+                                # Installation des dépendances d'un projet
+                                $ composer install
+
+                                # Mise à jour des dépendances du projet
+                                # en respectant les contraintes de version (semver)
+                                $ composer update
+
+                                # Installation de Monolog (v3)
+                                $ composer require "monolog/monolog:^3.0"
+
+                                # Retrait de Monolog
+                                $ composer remove "monolog/monolog:^3.0"
+                            </script>
+                        </Code>
+                        <h5 class="caption text-center">Composer (PHP)</h5>
+                    </div>
+
+                    <div class="fragment">
+                        <!-- JS NPM -->
+                        <Code>
+                            <script type="text/template">
+                                # Installation des dépendances d'un projet
+                                $ npm install
+
+                                # Mise à jour des dépendances du projet
+                                # (en respectant les contraintes de version (semver))
+                                $ npm update
+
+                                # Installation de la librairie Luxon (v3)
+                                $ npm install luxon@3
+
+                                # Retrait de la librairie Luxon
+                                $ npm remove luxon
+                            </script>
+                        </Code>
+                        <h5 class="caption text-center">NPM (Javascript)</h5>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+</section>

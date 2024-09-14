@@ -1,0 +1,52 @@
+---
+import Code from "../../components/code.astro";
+---
+
+<section>
+    <div class="r-stretch">
+        <h1 class="section-title">
+            Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+        </h1>
+        <main>
+
+            <div class="fragment">
+                <Code>
+                    <script type="text/template">
+                        <?php
+
+                        use Psr\Log\LoggerInterface;
+                        // ...
+
+                        public function index(LoggerInterface $logger): Response
+                        {
+                            $logger->info('I just got the logger');
+                            $logger->error('An error occurred');
+                        }
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Exemple adapté de la <a href="https://symfony.com/doc/current/logging.html">documentation Symfony</a>
+                </div>
+
+                <Code>
+                    <script type="text/template">
+                        <?php
+
+                        use Illuminate\Support\Facades\Log;
+                        // ...
+
+                        public function index(): Response
+                        {
+                            Log::debug('I just got the logger');
+                            Log::error('An error occurred');
+                        }
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Exemple adapté de la <a href="https://laravel.com/docs/11.x/logging#writing-log-messages">documentation Laravel</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</section>

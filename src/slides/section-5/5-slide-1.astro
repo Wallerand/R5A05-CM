@@ -1,0 +1,41 @@
+---
+import Code from "../../components/code.astro";
+---
+
+<section>
+    <div class="r-stretch">
+        <h1 class="section-title">
+            Qualité et conformité
+        </h1>
+        <main>
+            
+            <ul>
+                <li style="margin-bottom: 32px;">
+                    Tester une requête à un service météo
+                    <Code><script type="text/template">
+                        <?php
+
+                        Http::fake([
+                            // Stub a JSON response for public-api.meteofrance.fr endpoints
+                            'https://public-api.meteofrance.fr/*' => Http::response(['foo' => 'bar'], 200, $headers),
+                        ]);
+                    </script>
+                    </Code>
+
+                <li>
+                    Tester l’envoi d’un email
+                    <Code><script type="text/template">
+                        <?php
+
+                        Mail::fake();
+
+                        // Vérifier que l'email "OrderConfirmationSent" a été envoyé à user@example.com
+                        Mail::assertSent(OrderConfirmationSent::class, 'user@example.com');
+                    </script>
+                    </Code>
+                </li>
+            </ul>
+            
+        </main>
+    </div>
+</section>

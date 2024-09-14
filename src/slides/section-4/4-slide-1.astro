@@ -1,0 +1,64 @@
+<section>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Contexte d'exécution de la charge de travail</small>
+            </h1>
+            <main>
+                <h3>2 contextes d'exécution :</h3>
+                <ol>
+                    <li>Traitement dans la requête (synchrone, depuis le navigateur)<br>
+                        = client (requête) → serveur (réponse)<br><br>
+                    </li>
+                    <li>Traitement en arrière-plan (asynchrone, hors navigateur)<br>
+                        = événement déclencheur → traitement → résultat<br>
+                        = action de l'utilisateur, timer, etc. → tâche → un fichier, un e-mail, etc.<br>
+                    </li>
+                </ol>
+            </main>
+        </div>
+    </section>
+
+    <section data-background-image="images/background-6.jpg" data-background-opacity="0.15">
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Contexte d'exécution de la charge de travail</small>
+            </h1>
+            <main>
+                <h3>Pourquoi ?</h3>
+                <ol>
+                    <li>Logique métier / fonctionnelle</li>
+                    <li>Traitement long</li>
+                    <li>Performance</li>
+                    <li>Sécurité / conformité</li>
+                </ol>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Contexte d'exécution de la charge de travail</small>
+            </h1>
+            <main>
+                <h3>Les étapes de traitement synchrone (requête) :</h3>
+                <ol>
+                    <li>Le client émet la requête (GET / POST) avec ou sans paramètres (form-data, url-encoded, etc.)</li>
+                    <li>Le serveur Web traite la requête (proxy/fichiers statiques/terminaison TLS/HTTPS, etc.) et la transfère à l’application</li>
+                    <li>L’application reçoit et traite la requête puis génère la réponse
+                        <ol>
+                            <li>Couche 1 : pré-traitement (middleware)</li>
+                            <li>Couche 2 : validation (si données entrantes/formulaires)</li>
+                            <li>Couche 3 : action (traitement)</li>
+                            <li><i>facultatif:</i> rendu HTML (si la réponse est une page Web)</li>
+                        </ol>
+                    </li>
+                    <li>L’application transmet la réponse au serveur Web</li>
+                    <li>Le serveur Web transmet la réponse au client</li>
+                </ol>
+            </main>
+        </div>
+    </section>
+
+</section>

@@ -1,0 +1,160 @@
+---
+import Code from "../../components/code.astro";
+---
+
+<section>
+    <section data-background-image="images/background-5.jpg" data-background-opacity="0.15">
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Gestion des dépendances <small>/</small> <small>Injection de dépendances</small>
+            </h1>
+            <main>
+                <div>
+                    <blockquote>
+                        L’« Injection de dépendances » est un terme à 25 dollars pour un concept à 5 centimes. [...] L'injection de dépendances consiste à donner à un objet ses variables d'instance. [...].
+                        <br>&mdash; <a href="https://www.jamesshore.com/v2/blog/2006/dependency-injection-demystified">James Shore</a>
+                    </blockquote>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Gestion des dépendances <small>/</small> <small>Injection de dépendances</small>
+            </h1>
+            <main>
+                <Code>
+                    <script type="text/template">
+                        <?php
+
+                        namespace Database;
+
+                        class Database
+                        {
+                            protected $adapter;
+
+                            public function __construct()
+                            {
+                                $this->adapter = new MySqlAdapter;
+                            }
+                        }
+
+                        class MysqlAdapter {}
+                    </script>
+                </Code>
+
+                <Code>
+                    <script type="text/template">
+                    <?php
+
+                    namespace Database;
+
+                    class Database
+                    {
+                        public function __construct(protected MySqlAdapter $adapter)
+                        {
+                            //
+                        }
+                    }
+
+                    class MysqlAdapter {}
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Exemple extrait de <a href="https://phptherightway.com/#basic_concept">PHP: The Right Way</a>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Gestion des dépendances <small>/</small> <small>Injection de dépendances</small>
+            </h1>
+            <main>
+                <Code>
+                    <script type="text/template">
+                    <?php
+
+                    namespace Database;
+
+                    class Database
+                    {
+                        public function __construct(protected AdapterInterface $adapter)
+                        {
+                            //
+                        }
+                    }
+
+                    interface AdapterInterface {}
+
+                    class MysqlAdapter implements AdapterInterface {}
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Exemple extrait de <a href="https://phptherightway.com/#basic_concept">PHP: The Right Way</a>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Gestion des dépendances <small>/</small> <small>Injection de dépendances</small>
+            </h1>
+            <main>
+                <ul>
+                    <li>Conteneur d'injection ≠ Injection de dépendances</li>
+                    <li>Conteneur d’injection = un des mécanismes qui permet de mettre en oeuvre l’injection de dépendances</li>
+                    <li>
+                        Rôles :
+                        <ul>
+                            <li>Centraliser l'instantiation des classes au même endroit</li>
+                            <li>Gérer le cycle de vie des objets</li>
+                        </ul>
+                    </li>
+                    <li>Intégré dans les frameworks (avec des implémentations différentes)</li>
+                    <li>En pratique, il y a très peu d'interaction avec le conteneur (autowiring)</li>
+                </ul>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Gestion des dépendances <small>/</small> <small>Injection de dépendances</small>
+            </h1>
+            <main>
+                <Code>
+                    <script type="text/template">
+                    <?php
+
+                    use App\Services\AppleMusic;
+                    use Illuminate\View\View;
+
+                    class PodcastController extends Controller
+                    {
+                        /**
+                         * Show information about the given podcast.
+                         */
+                        public function show(string $id, AppleMusic $apple): View
+                        {
+                            return view('podcasts.show', [
+                                'podcast' => $apple->findPodcast($id)
+                            ]);
+                        }
+                    }
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Autowiring (exemple adapté depuis <a href="https://laravel.com/docs/11.x/container#introduction">Laravel</a>)
+                </div>
+            </main>
+        </div>
+    </section>
+</section>

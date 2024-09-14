@@ -1,0 +1,15 @@
+---
+interface Props {
+  lines?: string;
+}
+
+const { lines = '' } = Astro.props;
+
+const code = await Astro.slots.render('default');
+---
+
+<pre>
+    <code data-trim data-noescape data-line-numbers={lines}>
+        <Fragment set:html={code} />
+    </code>
+</pre>

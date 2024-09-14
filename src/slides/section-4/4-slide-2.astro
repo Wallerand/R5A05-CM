@@ -1,0 +1,219 @@
+---
+import Code from "../../components/code.astro";
+---
+
+<section>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Définir la requête</small>
+            </h1>
+            <main>
+                <h3>1. Définir la requête</h3>
+                <ul style="margin-bottom: 36px;">
+                    <li>Le routage (routing)</li>
+                    <li>Les pré-traitements</li>
+                </ul>
+                <h3>2. Traiter la requête</h3>
+                <ul style="margin-bottom: 36px;">
+                    <li>Valider les données entrantes</li>
+                    <li>Prendre en charge l’envoi de fichiers</li>
+                    <li>Manipuler les données persistantes</li>
+                </ul>
+                <h3>3. Générer la réponse</h3>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Définir la requête (routing)</small>
+            </h1>
+            <main>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center">Action</th>
+                            <th class="text-center">URL</th>
+                            <th class="text-center">Route</th>
+                            <th class="text-center">Nom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Page d’accueil</td>
+                            <td>blog.fr/</td>
+                            <td><code>/</code></td>
+                            <td><code>index</code></td>
+                        </tr>
+                        <tr>
+                            <td>Liste des posts</td>
+                            <td>blog.fr/posts</td>
+                            <td><code>/posts</code></td>
+                            <td><code>posts_list</code></td>
+                        </tr>
+                        <tr>
+                            <td>Affichage du post #1</td>
+                            <td>blog.fr/posts/1</td>
+                            <td><code>/posts/1</code></td>
+                            <td><code>posts_show</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Définir la requête (routing)</small>
+            </h1>
+            <main>
+                <h3 class="text-center">Symfony (PHP)</h3>
+                <Code lines="9,11">
+                <script type="text/template">
+                    <?php
+
+                    namespace App\Controller;
+
+                    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+                    use Symfony\Component\HttpFoundation\Response;
+                    use Symfony\Component\Routing\Attribute\Route;
+
+                    class PostController extends AbstractController
+                    {
+                        #[Route('/posts', name: 'posts_list')]
+                        public function list(): Response
+                        {
+                            // ...
+                        }
+                    }
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Fichier src/Controller/PostController.php
+                </div>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Définir la requête (routing)</small>
+            </h1>
+            <main>
+                <h3 class="text-center">Spring (Java)</h3>
+                <Code lines="9,11">
+                <script type="text/template">
+                    package com.example.servingwebcontent;
+
+                    import org.springframework.stereotype.Controller;
+                    import org.springframework.ui.Model;
+                    import org.springframework.web.bind.annotation.GetMapping;
+                    import org.springframework.web.bind.annotation.RequestParam;
+
+                    @Controller
+                    public class PostController {
+
+                        @GetMapping("/posts", name = "posts_list")
+                        public String list() {
+                            // ...
+                        }
+
+                    }
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Fichier src/main/java/com/example/servingwebcontent/PostController.java
+                </div>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Définir la requête (routing)</small>
+            </h1>
+            <main>
+                <h3 class="text-center">Laravel (PHP)</h3>
+                <Code lines="6">
+                <script type="text/template">
+                    <?php
+
+                    use Illuminate\Support\Facades\Route;
+                    use App\Http\Controllers\PostController;
+
+                    Route::get('/posts', [PostController::class, 'list'])->name('posts_list');
+                </script>
+                </Code>
+
+                <div class="caption text-center">
+                    Fichier routes/web.php
+                </div>
+
+                <Code lines="7">
+                <script type="text/template">
+                    <?php
+
+                    namespace App\Http\Controllers;
+
+                    use Illuminate\Http\Reponse;
+
+                    class PostController extends Controller
+                    {
+                        public function list(): Response
+                        {
+                            // ...
+                        }
+                    }
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Fichier app/Http/Controllers/PostController.php
+                </div>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Définir la requête (pré-traitements)</small>
+            </h1>
+            <main>
+                
+                <ul>
+                    <li>Vérifications communes/partagées entre plusieurs routes</li>
+                    <li>Vérifications réalisées en amont du traitement 
+                        <br>= avant d’arriver à la méthode du contrôleur
+                    </li>
+                    <li>Exemples :
+                        <ul>
+                            <li>Vérifier que l’application n’est pas en maintenance</li>
+                            <li>Vérifier la validation du jeton CSRF</li>
+                            <li>Vérifier si l’utilisateur est identifié et s’il a le droit de réaliser l’action</li>
+                            <li>Inscrire dans le journal un type spécifique d’actions</li>
+                        </ul>
+                    </li>
+                    <li>Selon les frameworks, l'implémentation diffère :
+                        <ul>
+                            <li>Laravel : middleware / guard</li>
+                            <li>Symfony : events / firewall</li>
+                            <li>Java : intercepting filters</li>
+                        </ul>
+                    </li>
+                </ul>
+                
+            </main>
+        </div>
+    </section>
+</section>

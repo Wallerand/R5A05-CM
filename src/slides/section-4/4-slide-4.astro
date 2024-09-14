@@ -1,0 +1,86 @@
+---
+import Code from "../../components/code.astro";
+---
+
+<section>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Générer la réponse</small>
+            </h1>
+            <main>
+                <h3 style="text-decoration: line-through;">1. Définir la requête</h3>
+                <ul style="margin-bottom: 36px; text-decoration: line-through;">
+                    <li>Le routage (routing)</li>
+                    <li>Les pré-traitements</li>
+                </ul>
+                <h3 style="text-decoration: line-through;">2. Traiter la requête</h3>
+                <ul style="margin-bottom: 36px; text-decoration: line-through;">
+                    <li>Valider les données entrantes</li>
+                    <li>Prendre en charge l’envoi de fichiers</li>
+                    <li>Manipuler les données persistantes</li>
+                </ul>
+                <h3>3. Générer la réponse</h3>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Générer la réponse</small>
+            </h1>
+            <main>
+                
+                <Code>
+                    <script type="text/template">
+                        <?php
+
+                        $userFirstname = "Prénom";
+
+                        # Symfony
+                        $this->render('nom-de-la-vue.html.twig', [
+                            'firstname' => $userFirstName,
+                        ]);
+
+                        # Laravel
+                        view('nom-de-la-vue', [
+                            'firstname' => $userFirstName
+                        ]);
+                    </script>
+                </Code>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Générer la réponse</small>
+            </h1>
+            <main>
+                
+                <Code>
+                    <script type="text/template">
+                        <?php
+                        
+                        // PHP natif
+                        <h1>Bonjour <? echo ($firstname); ?></h1>
+
+                        // Twig (Symfony)
+                        // Fichier templates/nom-de-la-vue.html.twig
+                        <h1>Bonjour {{ firstname }}</h1> // note: absence de "$"
+
+                        // Blade (Laravel)
+                        // Fichier resources/views/nom-de-la-vue.blade.php
+                        <h1>Bonjour {{ $firstname }}</h1>
+                    </script>
+                </Code>
+
+            </main>
+        </div>
+    </section>
+
+</section>

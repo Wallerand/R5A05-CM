@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Intro from '../slides/00-intro.astro';
+import Refs from '../slides/98-refs.astro';
+import Outro from '../slides/99-outro.astro';
+const slides = await Astro.glob('../slides/section-**/**slide**.astro');
+---
+
+<Layout title="IUT du Limousin / BUT3 INFO / R5A05 / CM">
+	<div class="reveal">
+		<div class="slides">
+
+			<Intro />
+
+			{slides.map((component) => (
+				<component.default />
+			))}
+
+			<Refs />
+			<Outro />
+
+		</div>
+	</div>
+</Layout>

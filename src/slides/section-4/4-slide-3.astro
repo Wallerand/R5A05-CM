@@ -1,0 +1,281 @@
+---
+import Code from "../../components/code.astro";
+---
+
+<section>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Traiter la requête</small>
+            </h1>
+            <main>
+                <h3 style="text-decoration: line-through;">1. Définir la requête</h3>
+                <ul style="margin-bottom: 36px; text-decoration: line-through;">
+                    <li>Le routage (routing)</li>
+                    <li>Les pré-traitements</li>
+                </ul>
+                <h3>2. Traiter la requête</h3>
+                <ul style="margin-bottom: 36px;">
+                    <li>Valider les données entrantes</li>
+                    <li>Prendre en charge l’envoi de fichiers</li>
+                    <li>Manipuler les données persistantes</li>
+                </ul>
+                <h3>3. Générer la réponse</h3>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Définir la requête (validation)</small>
+            </h1>
+            <main>
+                
+                <ul>
+                    <li>Validation côté serveur (back) ⇒ obligatoire</li>
+                    <li>Validation côté client (front) ⇒ additionnelle, facultative 
+                        <Code lines="7">
+                            <script type="text/template">
+
+                            // Le navigateur affiche une erreur à l'utilisateur si
+                            // - le champ email est vide
+                            // - ne correspond pas au format d'une adresse
+
+                            <input type="email" required />
+
+                        </script>
+                        </Code>
+                    </li>
+                    <li>Les frameworks embarquent presque tous des mécanismes pour définir des règles de validation des données entrantes</li>
+                </ul>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Traiter la requête (validation)</small>
+            </h1>
+            <main>
+                <h3 class="text-center">PHP natif (procédural)</h3>
+                <Code>
+                <script type="text/template">
+                    <?php
+
+                    $name = htmlspecialchars($_POST['name']);
+                    $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+
+                    if (mb_strlen($name) < 4 || mb_strlen($name) > 100 || $email === false) {
+                        // Formulaire invalide
+                    }
+
+                    // Formulaire valide
+                </script>
+                </Code>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Traiter la requête (validation)</small>
+            </h1>
+            <main>
+                <h3 class="text-center">Symfony</h3>
+                <Code lines="7-12"><script type="text/template">
+                    <?php
+
+                    use Symfony\Component\Validator\Constraints as Assert;
+
+                    class Author
+                    {
+                        #[Assert\NotBlank]
+                        #[Assert\Length(min: 4, max: 100)]
+                        private string $name;
+
+                        #[Assert\Email]
+                        private string $email;
+                    }
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Fichier src/Entity/Author.php
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Traiter la requête (validation)</small>
+            </h1>
+            <main>
+                <h3 class="text-center">Laravel</h3>
+                <Code lines="1,5-8">
+                <script type="text/template">
+                    class AuthorController extends Controller
+                    {
+                        public function create(Request $request): Response
+                        {
+                            $validatedData = $request->validate([
+                                'name' => 'required|string|min:4|max:100',
+                                'email' => 'required|email',
+                            ]);
+
+                            // ...
+                        }
+                    }
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Fichier app/Http/Controllers/AuthorController.php
+                </div>
+
+                <Code>
+                <script type="text/template">
+                    <?php
+
+                    public function rules(): array
+                    {
+                        return [
+                            'name' => 'required|string|min:4|max:100',
+                            'email' => 'required|email',
+                        ];
+                    }
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Fichier app/Http/Requests/CreateAuthorRequest.php
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Traiter la requête (envoi de fichiers)</small>
+            </h1>
+            <main>
+                <Code>
+                    <script type="text/template">
+                    <?php
+                    $uploaddir = '/var/www/uploads/';
+                    $uploadfile = $uploaddir . basename($_FILES['photo']['name']);
+
+                    echo '<pre>';
+                    if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadfile)) {
+                        echo "File is valid, and was successfully uploaded.\n";
+                    } else {
+                        echo "Possible file upload attack\n";
+                    }
+
+                    echo 'Here is some more debugging info:';
+                    print_r($_FILES);
+
+                    print "</pre>";
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Exemple adapté à partir de la documentation <a href="https://www.php.net/manual/en/features.file-upload.post-method.php">PHP.net</a>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Traiter la requête (envoi de fichiers)</small>
+            </h1>
+            <main>
+                <Code>
+                    <script type="text/template">
+                    <?php
+                    
+                    // Valider le fichier
+                    $this->validate(['photo' => 'required|image']);
+
+                    // Récupérer le fichier en tant qu'objet (Illuminate\Http\UploadedFile, non natif)
+                    $file = $request->file('photo'); // = $request->photo
+
+                    // Enregister le fichier dans le dossier "images"
+                    $path = $file->store('images');  // = $request->photo->store('images')
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Laravel
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Traiter la requête (manipuler les données persistantes)</small>
+            </h1>
+            <main>
+                
+                <img src="images/ORM.svg" alt="ORM">
+                <div class="caption text-center">
+                    Source: <a href="https://symfony.com/doc/current/doctrine.html">Databases and the Doctrine ORM (Symfony)</a>
+                </div>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Traiter la requête (manipuler les données persistantes)</small>
+            </h1>
+            <main>
+                
+                <Code>
+                    <script type="text/template">
+                    <?php
+                    
+                    use App\Models\Author;
+
+                    ...
+
+                    $author = new Author();
+                    $author->name = "Prénom Nom";
+                    $author->email = "prenom@exemple.com";
+                    $author->save(); // = INSERT INTO authors (name, email) VALUES ("Prénom Nom", ...
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Eloquent ORM (Laravel)
+                </div>
+
+                <Code>
+                <script type="text/template">
+                    <?php
+                    
+                    use App\Entity\Author;
+
+                    $author = new Author();
+                    $author->setName("Prénom Nom");
+                    $author->setEmail("prenom.nom@exemple.com");
+
+                    $entityManager->persist($author);
+                    $entityManager->flush(); // = INSERT INTO authors (name, email) VALUES ("Prénom Nom", ...
+                </script>
+                </Code>
+                <div class="caption text-center">
+                    Doctrine ORM (Symfony)
+                </div>
+                
+            </main>
+        </div>
+    </section>
+</section>

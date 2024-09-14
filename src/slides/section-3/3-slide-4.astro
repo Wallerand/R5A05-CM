@@ -1,0 +1,55 @@
+---
+import Code from "../../components/code.astro";
+---
+
+<section>
+    <div class="r-stretch">
+        <h1 class="section-title">
+            Gestion des dépendances <small>/</small> <small>Autoloading</small>
+        </h1>
+        <main>
+            <div>
+                <div>
+                    <Code lines="4-6">
+                        <script type="text/template" is:inline>
+                            <?php
+
+                            // Chargement des fichiers
+                            require "...";
+                            require "lib/config.php";
+                            require "lib/database.php";
+
+                            // Instantiation des classes
+                            $config = new Config("config.php");
+                            $database = new Database(...);
+
+                            // Appel d'une méthode
+                            $database->getRows('SELECT * FROM posts ORDER BY created_at DESC LIMIT 5');
+                        </script>
+                    </Code>
+
+                    <h5 class="caption text-center">Sans autoloading</h5>
+                </div>
+
+                <div class="fragment">
+                    <Code>
+                        <script type="text/template">
+                            <?php
+
+                            // Chargement de tous les fichiers
+                            require __DIR__ . '/vendor/autoload.php';
+
+                            // Instantiation des classes
+                            $config = new Lib\Config("config.php");
+                            $database = new Lib\Database(...);
+
+                            // Appel d'une méthode
+                            $database->getRows('SELECT * FROM posts ORDER BY created_at DESC LIMIT 5');
+                        </script>
+                    </Code>
+                    <h5 class="caption text-center">Avec autoloading</h5>
+                </div>
+            </div>
+        </main>
+    </div>
+</section>
