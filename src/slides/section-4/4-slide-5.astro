@@ -3,50 +3,180 @@ import Code from "../../components/code.astro";
 ---
 
 <section>
-    <div class="r-stretch">
-        <h1 class="section-title">
-            Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
-        </h1>
-        <main>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+            </h1>
+            <main>
+                <h3 style="text-decoration: line-through;">1. Définir la requête</h3>
+                <ul style="margin-bottom: 36px; text-decoration: line-through;">
+                    <li>Le routage (routing)</li>
+                    <li>Les pré-traitements</li>
+                </ul>
+                <h3 style="text-decoration: line-through;">2. Traiter la requête</h3>
+                <ul style="margin-bottom: 36px; text-decoration: line-through;">
+                    <li>Valider les données entrantes</li>
+                    <li>Prendre en charge l’envoi de fichiers</li>
+                    <li>Manipuler les données persistantes</li>
+                </ul>
+                <h3 style="margin-bottom: 36px; text-decoration: line-through;">3. Générer la réponse</h3>
+                <h3>4. Gérer les erreurs</h3>
+            </main>
+        </div>
+    </section>
 
-            <div class="fragment">
-                <Code>
-                    <script type="text/template">
-                        <?php
+    <section data-background-image="images/background-7.jpg" data-background-opacity="0.15">
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+            </h1>
+            <main>
+                <blockquote>
+                    Malheureusement, peu importe la prudence que nous mettons lors de l'écriture de notre code, les erreurs sont un fait de la vie.
+                    <legend>&mdash; <a href="https://www.php.net/manual/fr/language.errors.php">PHP.net</a></legend>
+                </blockquote>
+            </main>
+        </div>
+    </section>
 
-                        use Psr\Log\LoggerInterface;
-                        // ...
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+            </h1>
+            <main>
+                <ul>
+                    <li>
+                        2 types d'erreurs
+                        <ul>
+                            <li>Erreurs techniques (réseau, système de fichiers, etc.)</li>
+                            <li>Erreurs fonctionnelles (cas imprévu, non pris en charge, etc.)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Dans tous les cas
+                        <ul>
+                            <li>S'assurer que l'erreur soit correctement traitée en interne</li>
+                            <li>S'assurer que l'erreur soit correctement affichée à l'utilisateur</li>
+                            <li>S'assurer que l'erreur soit tracée/journalisée/identifiable</li>
+                        </ul>
+                    </li>
+                </ul>
+    
+            </main>
+        </div>
+    </section>
 
-                        public function index(LoggerInterface $logger): Response
-                        {
-                            $logger->info('I just got the logger');
-                            $logger->error('An error occurred');
-                        }
-                    </script>
-                </Code>
-                <div class="caption text-center">
-                    Exemple adapté de la <a href="https://symfony.com/doc/current/logging.html">documentation Symfony</a>
-                </div>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+            </h1>
+            <main>
+    
+                <h3 style="margin-bottom: 34px;">Mécanisme de gestion des exceptions</h3>
+                <ul>
+                    <li>Spécifique au langage ou à la technologie utilisée</li>
+                    <li>Les frameworks PHP intègrent tous un gestionnaire d'exceptions</li>
+                    <li>
+                        Exemples
+                        <ul>
+                            <li>Afficher un message d'erreur à l'utilisateur pour l'aider à résoudre le problème (échec de validation)</li>
+                            <li>Afficher un message d'erreur à l'utilisateur pour contacter l'assistance (cas non identifié)</li>
+                            <li>Décider de ne pas bloquer le reste du traitement si l'exception levée ne le nécessite pas</li>
+                        </ul>
+                    </li>
+                </ul>
+    
+            </main>
+        </div>
+    </section>
 
-                <Code>
-                    <script type="text/template">
-                        <?php
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+            </h1>
+            <main class="text-center">
+    
+                <img src="images/symfony_error.png" style="max-width: 75%;" alt="">
+                <div class="caption">Source: <a href="https://symfony.com/doc/current/index.html">Symfony</a></div>
+    
+            </main>
+        </div>
+    </section>
 
-                        use Illuminate\Support\Facades\Log;
-                        // ...
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+            </h1>
+            <main class="text-center">
+    
+                <img src="images/laravel_error.png" style="max-width: 75%;" alt="">
+                <div class="caption">Source: <a href="https://laravel.com/docs/errors">Laravel</a></div>
+    
+            </main>
+        </div>
+    </section>
 
-                        public function index(): Response
-                        {
-                            Log::debug('I just got the logger');
-                            Log::error('An error occurred');
-                        }
-                    </script>
-                </Code>
-                <div class="caption text-center">
-                    Exemple adapté de la <a href="https://laravel.com/docs/11.x/logging#writing-log-messages">documentation Laravel</a>
-                </div>
-            </div>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+            </h1>
+            <main>
+                <h3 style="margin-bottom: 24px;">La journalisation</h3>
+                <p>
+                    Enregistrer des informations lors de l'utilisation de l'application :
+                    <ul>
+                        <li>Erreurs avec trace de la pile d'exécution <i>(par défaut)</i></li>
+                        <li>Informations de conformité (ex. action destructive d'un utilisateur, etc.)</li>
+                        <li>Informations de performances (ex. délai d'une requête SQL, temps de réponse d'une API, etc.)</li>
+                    </ul>
+                </p>
+            </main>
+        </div>
+    </section>
 
-        </main>
-    </div>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Gérer les erreurs</small>
+            </h1>
+            <main>
+                <ol>
+                    <li>
+                        Écrire des informations dans le journal
+                        <Code>
+                            <script type="text/template">
+                                <?php
+
+                                use Illuminate\Support\Facades\Log;
+
+                                Log::emergency("Message to write");
+                                Log::alert("Message to write");
+                                Log::critical("Message to write");
+                                Log::error("Message to write");
+                                Log::warning("Message to write");
+                                Log::notice("Message to write");
+                                Log::info("Message to write");
+                                Log::debug("Message to write");
+                            </script>
+                        </Code>
+                    </li>
+                    <li>
+                        Exploiter les informations inscrites
+                        <ul>
+                            <li>Dans un fichier <i>(ex. storage/logs/laravel.log)</i></li>
+                            <li>Dans une base de données</li>
+                            <li>Dans un service tiers <i>(Sentry, Datadog, etc.)</i></li>
+                            <li>...</li>
+                        </ul>
+                    </li>
+                </ol>
+            </main>
+        </div>
+    </section>
 </section>

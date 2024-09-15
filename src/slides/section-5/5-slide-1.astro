@@ -3,39 +3,67 @@ import Code from "../../components/code.astro";
 ---
 
 <section>
-    <div class="r-stretch">
-        <h1 class="section-title">
-            Qualité et conformité
-        </h1>
-        <main>
-            
-            <ul>
-                <li style="margin-bottom: 32px;">
-                    Tester une requête à un service météo
-                    <Code><script type="text/template">
-                        <?php
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Qualité et conformité
+            </h1>
+            <main>
+                <h3 style="font-size: 28px; margin-bottom: 12px;">Pourquoi écrire des tests ?</h3>
+                <ul style="margin-bottom: 34px;">
+                    <li>Écrite du code de qualité = écrire du code testable</li>
+                    <li>Gain de temps dans la durée</li>
+                    <li>Confort et sérénité d’esprit</li>
+                </ul>
 
-                        Http::fake([
-                            // Stub a JSON response for public-api.meteofrance.fr endpoints
-                            'https://public-api.meteofrance.fr/*' => Http::response(['foo' => 'bar'], 200, $headers),
-                        ]);
-                    </script>
-                    </Code>
+                <h3 style="font-size: 28px; margin-bottom: 12px;">Pourquoi appliquer des règles et conventions ?</h3>
+                <ul>
+                    <li>Partage du code source</li>
+                    <li>Gain de temps</li>
+                    <li>Cohérence</li>
+                </ul>
+            </main>
+        </div>
+    </section>
 
-                <li>
-                    Tester l’envoi d’un email
-                    <Code><script type="text/template">
-                        <?php
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Qualité et conformité <small>/</small> <small>Mocking</small>
+            </h1>
+            <main>
 
-                        Mail::fake();
-
-                        // Vérifier que l'email "OrderConfirmationSent" a été envoyé à user@example.com
-                        Mail::assertSent(OrderConfirmationSent::class, 'user@example.com');
-                    </script>
-                    </Code>
-                </li>
-            </ul>
-            
-        </main>
-    </div>
+                <ul>
+                    <li>
+                        Mocking = simuler le comportement d'objets
+                    </li>
+                    <li style="margin-bottom: 32px;">
+                        Tester une requête à un service météo
+                        <Code><script type="text/template">
+                            <?php
+    
+                            Http::fake([
+                                // Stub a JSON response for public-api.meteofrance.fr endpoints
+                                'https://public-api.meteofrance.fr/*' => Http::response(['foo' => 'bar'], 200, $headers),
+                            ]);
+                        </script>
+                        </Code>
+    
+                    <li>
+                        Tester l’envoi d’un email
+                        <Code><script type="text/template">
+                            <?php
+    
+                            Mail::fake();
+    
+                            // Vérifier que l'email "OrderConfirmationSent" a été envoyé à user@example.com
+                            Mail::assertSent(OrderConfirmationSent::class, 'user@example.com');
+                        </script>
+                        </Code>
+                    </li>
+                </ul>
+                
+            </main>
+        </div>
+    </section>
 </section>

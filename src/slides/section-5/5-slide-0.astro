@@ -1,32 +1,227 @@
-<section>
-    <div class="r-stretch">
-        <h1 class="section-title">
-            Authentification
-        </h1>
-        <main>
-            
-            <ul>
-                <li style="margin-bottom: 32px;">
-                    2 possibilités
-                    <ol>
-                        <li>Soit l’application intègre directement l’authentification</li>
-                        <li>Soit l’application délègue l’authentification à un autre service</li>
-                    </ol>
-                </li>
+---
+import Code from "../../components/code.astro";
+---
 
-                <li>
-                    Les frameworks facilitent ces 2 situations
-                    <ol>
-                        <li>ressources pour prendre en charge l’authentification intégrée
-                            <br>ex. middleware, guards, etc.
+<section>
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Authentification et autorisation <small>/</small> <small>Authentification</small>
+            </h1>
+            <main>
+                
+                <ul>
+                    <li style="margin-bottom: 24px;">
+                        Vérification de l'identité = besoin récurrent
+                    </li>
+
+                    <li style="margin-bottom: 24px;">
+                        Authentification ≠ autorisation
+                    </li>
+
+                    <li style="margin-bottom: 24px;">
+                        3 possibilités
+                        <ol>
+                            <li>Soit l’application intègre directement l’authentification</li>
+                            <li>Soit l’application délègue l’authentification à un autre service</li>
+                            <li>Soit l’application gère les deux situations (ex. Saas)</li>
+                        </ol>
+                    </li>
+    
+                    <li>
+                        Les frameworks facilitent la gestion de l'authentification
+                        <ol>
+                            <li>Ressources pour prendre en charge l’authentification intégrée
+                                <br>ex. middleware, guards, firewalls, etc.
+                            </li>
+                            <li>Ressources pour prendre en charge l’authentification déléguée
+                                <br>ex. API/services/protocoles (IAM, IdP, OpenID/OAuth, LDAP, etc.)
+                            </li>
+                        </ol>
+                    </li>
+                </ul>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Authentification et autorisation <small>/</small> <small>Authentification</small>
+            </h1>
+            <main>
+                
+                <h3 style="margin-bottom: 24px;">Authentification intégrée</h3>
+                <p>
+                    L'application gère le cycle de vie des utilisateurs (inscription/création → modification → suppression).
+                    <ul>
+                        <li>
+                            1 utilisateur = 1 ou plusieurs mécanismes d’authentification <br>
+                            <p style="font-size: 22px;">Adresse email/mdp, jeton par e-mail, WebAuthn, etc.</p>
                         </li>
-                        <li>ressources pour prendre en charge l’authentification à partir de protocoles
-                            <br>ex. OpenID/OAuth, LDAP, etc.
+                        <li>
+                            Selon l'architecture, après authentification, la session est conservée entre les requêtes :
+                            <ul>
+                                <li>SPA ou MPA (stateful) ⇒ session par témoin dans cookie <br> (HttpSecure, sameSite)</li>
+                                <li>SPA ou API (stateless) ⇒ par jeton <br> (iOS Keychain ou Android KeyStore)</li>
+                            </ul>
                         </li>
-                    </ol>
-                </li>
-            </ul>
-            
-        </main>
-    </div>
+                    </ul>
+                </p>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Authentification et autorisation <small>/</small> <small>Authentification</small>
+            </h1>
+            <main>
+                
+                <h3 style="margin-bottom: 24px;">Authentification déléguée</h3>
+                <p>
+                    L’application reçoit des informations de la part du fournisseur d’identité.
+                    <ul>
+                        <li>De manière synchrone (au moment de la connexion de l’utilisateur)</li>
+                        <li>
+                            De manière asynchrone (à l’initiative de l’IdP ou de l’app.) <br>
+                            <p style="font-size: 22px;">Informations de mise à jour de l’utilisateur auprès du fournisseur d’identité (changement d’email, suppression du compte, etc.)</p>
+                        </li>
+                    </ul>
+                </p>
+
+                <p>
+                    Certains protocoles vont plus loin (ex: déconnexion automatique)
+                </p>
+                
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Authentification et autorisation <small>/</small> <small>Authentification</small>
+            </h1>
+            <main class="text-center">
+                <h3 style="margin-bottom: 12px;">Protocole OpenID Connect (flux hybride simplifié)</h3>
+                <img src="images/ms_aad_oidc.svg" alt="">
+
+                <div class="caption text-center">
+                    Source: <a href="https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols-oidc">Documentation Microsoft</a>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Authentification et autorisation <small>/</small> <small>Authentification</small>
+            </h1>
+            <main class="text-center">
+                <h3 style="margin-bottom: 12px;">Protocole OpenID Connect (flux hybride simplifié)</h3>
+                <img src="images/ms_aad_jwt.png" alt="">
+
+                <div class="caption text-center">
+                    Exemple d'id_token (format JWT) &middot; source: <a href="https://learn.microsoft.com/en-us/entra/identity-platform/id-tokens">Documentation Microsoft</a>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Authentification et autorisation <small>/</small> <small>Authentification</small>
+            </h1>
+            <main class="text-center">
+                <h3 style="margin-bottom: 12px;">Protocole OpenID Connect (flux hybride simplifié)</h3>
+                <img src="images/ms_add_jwt_decoded.png" style="max-width: 80%;" alt="">
+
+                <div class="caption text-center">
+                    Exemple d'id_token décodé (format JSON) &middot; source: <a href="https://learn.microsoft.com/en-us/entra/identity-platform/id-tokens">Documentation Microsoft</a>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Authentification et autorisation <small>/</small> <small>Autorisation</small>
+            </h1>
+            <main>
+                
+                <ul>
+                    <li>
+                        Le mécanisme d'autorisation dépend du projet / des règles de gestion
+                        <p style="font-size: 22px;">
+                            Rôles <i>et/ou</i> permissions <i>et/ou</i> assignation explicite <i>et/ou</i> ...
+                        </p>
+                    </li>
+                    <li>
+                        Pattern d'autorisation courant
+                        <ol>
+                            <li>une action = une permission</li>
+                            <li>un rôle = plusieurs permissions</li>
+                            <li>un utilisateur = 1 ou plusieurs rôles</li>
+                        </ol>
+                    </li>
+                </ul>
+
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Authentification et autorisation <small>/</small> <small>Autorisation</small>
+            </h1>
+            <main>
+
+                <Code>
+                    <script type="text/template"> 
+                        <?php
+
+                        // Laravel
+                        $post = App\Models\Post::find($id);
+                        Illuminate\Support\Facades\Gate::authorize('update', $post);
+
+                        // Symfony
+                        $this->denyAccessUnlessGranted('ROLE_WRITER');
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Autorisation côté contrôleur
+                </div>
+
+                <Code>
+                    <script type="text/template">
+                        <?php
+
+                        // Blade (Laravel)
+                        @can('update', $post)
+                            <!-- The current user can update the post... -->
+                        @else
+                            <!-- ... -->
+                        @endcan
+                        
+                        // Twig (Symfony)
+                        {% if is_granted('ROLE_WRITER') %}
+                            <a href="...">Delete</a>
+                        {% endif %}
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Autorisation côté vue
+                </div>
+                
+            </main>
+        </div>
+    </section>
 </section>

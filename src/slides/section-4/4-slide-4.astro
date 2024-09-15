@@ -20,8 +20,40 @@ import Code from "../../components/code.astro";
                     <li>Prendre en charge l’envoi de fichiers</li>
                     <li>Manipuler les données persistantes</li>
                 </ul>
-                <h3>3. Générer la réponse</h3>
-                
+                <h3 style="margin-bottom: 36px;">3. Générer la réponse</h3>
+                <h3>4. Gérer les erreurs</h3>
+            </main>
+        </div>
+    </section>
+    
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Générer la réponse</small>
+            </h1>
+            <main>
+                <h3 class="text-center">API</h3>
+                <Code>
+                    <script type="text/template">
+                        {
+                            "data": [
+                                {
+                                    "id": 1,
+                                    "name": "Eladio Schroeder Sr.",
+                                    "email": "therese28@example.com"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "Liliana Mayert",
+                                    "email": "evandervort@example.com"
+                                }
+                            ]
+                        }
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Exemple de retour d'une API au format JavaScript Object Notation (JSON)
+                </div>
             </main>
         </div>
     </section>
@@ -32,7 +64,35 @@ import Code from "../../components/code.astro";
                 Cycle de vie des requêtes <small>/</small> <small>Générer la réponse</small>
             </h1>
             <main>
-                
+                <h3 class="text-center">MPA/SSR</h3>
+                <Code>
+                    <script type="text/template">
+                        <!DOCTYPE html>
+                        <html lang="fr">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Titre de la page</title>
+                        </head>
+                        <body>
+                            <h1>Bonjour Prénom</h1>
+                        </body>
+                        </html>
+                    </script>
+                </Code>
+                <div class="caption text-center">
+                    Page HTML compilée
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <section>
+        <div class="r-stretch">
+            <h1 class="section-title">
+                Cycle de vie des requêtes <small>/</small> <small>Générer la réponse</small>
+            </h1>
+            <main>
                 <Code>
                     <script type="text/template">
                         <?php
