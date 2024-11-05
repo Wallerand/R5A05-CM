@@ -1,6 +1,6 @@
 {
   "name": "r5a05-cm",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
@@ -9,7 +9,7 @@
     "astro": "ASTRO_TELEMETRY_DISABLED=1 astro"
   },
   "dependencies": {
-    "astro": "^4.15.4",
+    "astro": "^4.16.9",
     "reveal.js": "^5.1.0"
   }
 }
